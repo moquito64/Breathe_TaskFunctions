@@ -8,17 +8,30 @@
 import UIKit
 class ThirdViewController: UIViewController {
     
-  
+    var TODOItems = [ToDoItem]()
+    var progressValue = 0.0
+    var barValue = 0.0
   
     @IBOutlet weak var StatusTextField: UITextView!
    
     @IBOutlet weak var barprogress: UIProgressView!
-    
-  
-
+   
+    func getProgress(){
+        let _otherVC = FirstViewController()
+        TODOItems = _otherVC.todoItems
+        
+        barValue = _otherVC.curCount
+    }
+    @objc func updateProgress() {
+        progressValue = progressValue + 0.01
+        self.barprogress.progress = Float(progressValue)
+        if progressValue != 1.0 {
+            self.perform(#selector(updateProgress), with: nil, afterDelay: 0.2)
+        }
+    }
     override func viewDidLoad() {
     super.viewDidLoad()
-    self.barprogress.progress = Float(curCount)
+    self.perform(#selector(updateProgress), with: nil, afterDelay: 0.2)
    
 }
 
