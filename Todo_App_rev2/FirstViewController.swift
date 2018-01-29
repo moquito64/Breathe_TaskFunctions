@@ -7,12 +7,19 @@
 //
 
 import UIKit
-
+import Firebase
+import FirebaseDatabase
+import GoogleSignIn
 
 class FirstViewController: UITableViewController {
     
     var todoItems = [ToDoItem]()
     var curCount = 0.0
+    var ref: DatabaseReference!
+    
+    
+    
+    
     @IBOutlet weak var myTableView: UITableView!
    
     //private var todoItems = ToDoItem.getMockData()
@@ -126,6 +133,7 @@ class FirstViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ref = Database.database().reference()
         self.title = "To-Do"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(FirstViewController.didTapAddItemButton(_:)))
         
