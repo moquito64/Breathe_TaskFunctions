@@ -6,7 +6,9 @@
 //  Copyright © 2017 The Two Musketeers LLC. All rights reserved.
 //
 import UIKit
-class ThirdViewController: UIViewController {
+import Firebase
+import GoogleSignIn
+class ThirdViewController: UIViewController, GIDSignInUIDelegate{
     
     var TODOItems = [ToDoItem]()
     var progressValue = 0.0
@@ -32,6 +34,7 @@ class ThirdViewController: UIViewController {
     override func viewDidLoad() {
     super.viewDidLoad()
     self.perform(#selector(updateProgress), with: nil, afterDelay: 0.2)
+    GIDSignIn.sharedInstance().uiDelegate = self
    
 }
 
@@ -40,6 +43,10 @@ override func didReceiveMemoryWarning() {
     // Dispose of any resources that can be recreated.
 }
     
+    @IBAction func SignOut(_ sender: UIButton) {
+        GIDSignIn.sharedInstance().signOut()
+        self.performSegue(withIdentifier: "signOut", sender: self)
+    }
     
 }
 

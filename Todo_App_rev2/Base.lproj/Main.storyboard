@@ -50,6 +50,9 @@
                                 <state key="normal" title="SignOut" image="Entypo_d83d(0)_48">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="SignOut:" destination="451-qZ-mCd" eventType="touchUpInside" id="aDc-6N-jAa"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -60,6 +63,7 @@
                     <connections>
                         <outlet property="StatusTextField" destination="xO5-iF-JLC" id="ssH-0J-TLY"/>
                         <outlet property="barprogress" destination="HPu-zl-DvI" id="DVg-WY-snT"/>
+                        <segue destination="9dV-If-7d9" kind="show" identifier="signOut" id="LPA-ky-Et9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5It-xS-XFu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -70,6 +74,7 @@
         <scene sceneID="yl2-sM-qoP">
             <objects>
                 <tabBarController id="49e-Tb-3d3" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="pul-ge-7wt"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -91,22 +96,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5VM-KX-x8P" customClass="GIDSignInButton">
-                                <rect key="frame" x="67" y="242" width="240" height="128"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sign In: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RPs-MM-7dE">
+                                <rect key="frame" x="67" y="258" width="61" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" image="Splash" translatesAutoresizingMaskIntoConstraints="NO" id="aiB-gb-QIg">
+                                <rect key="frame" x="123" y="71" width="128" height="128"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KDg-qL-gFm" customClass="GIDSignInButton">
+                                <rect key="frame" x="67" y="287" width="240" height="124"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="LoginDidTouch:" destination="9dV-If-7d9" eventType="touchUpInside" id="y4W-bL-Yt9"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="2wS-Yf-mWf"/>
                     </view>
                     <connections>
-                        <segue destination="49e-Tb-3d3" kind="show" id="9eX-Wu-gKX"/>
+                        <segue destination="49e-Tb-3d3" kind="show" identifier="LoginWorks" id="OvE-Yb-KlF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pWu-KH-xcM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-766" y="15"/>
+            <point key="canvasLocation" x="-767.20000000000005" y="14.842578710644679"/>
         </scene>
         <!--First View Controller-->
         <scene sceneID="Y5t-Cp-VDO">
@@ -174,6 +193,7 @@
         <image name="Entypo_2302(1)_32" width="32" height="32"/>
         <image name="Entypo_d83d(0)_48" width="48" height="48"/>
         <image name="Entypo_e731(2)_32" width="32" height="32"/>
+        <image name="Splash" width="128" height="128"/>
         <image name="StatusAvatar" width="48" height="48"/>
     </resources>
 </document>
