@@ -20,7 +20,7 @@
 		9E2A93351FD4C9F400157DCF /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2A93341FD4C9F400157DCF /* ThirdViewController.swift */; };
 		9E5E0C9C20059D6200E71446 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E0C9B20059D6200E71446 /* SignIn.swift */; };
 		9E62B196200575C0008B08AE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E62B195200575BF008B08AE /* GoogleService-Info.plist */; };
-		9E7ED4FC1FD62772002347C0 /* MyToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7ED4FB1FD62772002347C0 /* MyToDo.swift */; };
+		9E7ED4FC1FD62772002347C0 /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7ED4FB1FD62772002347C0 /* TaskItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,7 +64,7 @@
 		9E2A93341FD4C9F400157DCF /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
 		9E5E0C9B20059D6200E71446 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
 		9E62B195200575BF008B08AE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		9E7ED4FB1FD62772002347C0 /* MyToDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDo.swift; sourceTree = "<group>"; };
+		9E7ED4FB1FD62772002347C0 /* TaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
 		A6EEFC8053CFC53C6FECE9D2 /* Pods-Todo_App_rev2UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todo_App_rev2UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Todo_App_rev2UITests/Pods-Todo_App_rev2UITests.debug.xcconfig"; sourceTree = "<group>"; };
 		E7D78CD2A7DDEA7FA7CCFEF7 /* Pods-Todo_App_rev2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todo_App_rev2.release.xcconfig"; path = "Pods/Target Support Files/Pods-Todo_App_rev2/Pods-Todo_App_rev2.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -146,7 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				9E0EC90E1F7B3F2B001F3297 /* AppDelegate.swift */,
-				9E7ED4FB1FD62772002347C0 /* MyToDo.swift */,
+				9E7ED4FB1FD62772002347C0 /* TaskItem.swift */,
 				9E0EC9101F7B3F2B001F3297 /* FirstViewController.swift */,
 				9E2A93341FD4C9F400157DCF /* ThirdViewController.swift */,
 				9E0EC9141F7B3F2B001F3297 /* Main.storyboard */,
@@ -486,7 +486,7 @@
 				9E2A93351FD4C9F400157DCF /* ThirdViewController.swift in Sources */,
 				9E5E0C9C20059D6200E71446 /* SignIn.swift in Sources */,
 				9E0EC9111F7B3F2B001F3297 /* FirstViewController.swift in Sources */,
-				9E7ED4FC1FD62772002347C0 /* MyToDo.swift in Sources */,
+				9E7ED4FC1FD62772002347C0 /* TaskItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

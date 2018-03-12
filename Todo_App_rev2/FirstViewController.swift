@@ -15,7 +15,7 @@ class FirstViewController: UITableViewController {
     
     var todoItems = [ToDoItem]()
     var curCount = 0.0
-    var ref: DatabaseReference!
+    let ref = Database.database().reference()
     
     
     
@@ -83,8 +83,8 @@ class FirstViewController: UITableViewController {
     {
         // Create an alert
         let alert = UIAlertController(
-            title: "New to-do item",
-            message: "Insert the title of the new to-do item:",
+            title: "New Task",
+            message: "Insert the title of the Task:",
             preferredStyle: .alert)
         
         // Add a text field to the alert for the new item's title
@@ -133,7 +133,7 @@ class FirstViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ref = Database.database().reference()
+        
         self.title = "To-Do"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(FirstViewController.didTapAddItemButton(_:)))
         

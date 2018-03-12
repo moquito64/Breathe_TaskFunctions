@@ -23,13 +23,14 @@ class SignIn: UIViewController, GIDSignInUIDelegate {
     func alreadyIN(){
         if(GIDSignIn.sharedInstance().hasAuthInKeychain()){
             self.performSegue(withIdentifier: "LoginWorks", sender: self)
+            
         }
         
     }
     
     @IBAction func LoginDidTouch(_ sender: GIDSignInButton) {
         
-        GIDSignIn.sharedInstance().signIn()
+        GIDSignIn.sharedInstance().signInSilently()
         alreadyIN()
     
        
