@@ -8,33 +8,48 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import FirebaseDatabase
 class ThirdViewController: UIViewController, GIDSignInUIDelegate{
     
-    var TODOItems = [ToDoItem]()
-    var progressValue = 0.0
-    var barValue = 0.0
-  
+    let ref = Database.database().reference(withPath: "BreatheDatabase")
+    let user = Auth.auth().currentUser
+    var tableCount = 0
+    var maxProgress = 1.0
     @IBOutlet weak var StatusTextField: UITextView!
    
     @IBOutlet weak var barprogress: UIProgressView!
    
-    func getProgress(){
-        let _otherVC = FirstViewController()
-        TODOItems = _otherVC.todoItems
-        
-        barValue = _otherVC.curCount
-    }
+   
     @objc func updateProgress() {
-        progressValue = progressValue + 0.01
-        self.barprogress.progress = Float(progressValue)
-        if progressValue != 1.0 {
+        
+        print(self.barprogress.progress)
+        self.barprogress.progress = Float(Double(self.tableCount) * 0.1)
+        if (self.barprogress.progress <= Float(maxProgress)){
             self.perform(#selector(updateProgress), with: nil, afterDelay: 0.2)
         }
+      
     }
     override func viewDidLoad() {
     super.viewDidLoad()
+        ref.queryOrdered(byChild: "completed").observe(.value, with: { snapshot in
+            var newItems: [TaskItem] = []
+            
+            for item in snapshot.children {
+                let taskItem = TaskItem(snapshot: item as! DataSnapshot)
+                if(taskItem.addedByUser == self.user?.email){
+                    newItems.append(taskItem)
+                }
+                self.tableCount = newItems.count
+                
+            }
+            
+        })
+        
+        
+        
     self.perform(#selector(updateProgress), with: nil, afterDelay: 0.2)
     GIDSignIn.sharedInstance().uiDelegate = self
+    
    
 }
 

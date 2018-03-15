@@ -17,7 +17,7 @@ class SignIn: UIViewController, GIDSignInUIDelegate {
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().signInSilently()
         alreadyIN()
-       
+    
     }
     
     func alreadyIN(){

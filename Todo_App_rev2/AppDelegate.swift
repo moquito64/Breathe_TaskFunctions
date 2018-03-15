@@ -14,7 +14,7 @@ import GoogleSignIn
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
         // ...
-        if let error = error {
+        if error != nil {
             // ...
             return
         }
@@ -24,8 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
                                                        accessToken: authentication.accessToken)
         // ...
         Auth.auth().signIn(with: credential) { (user, error) in
-            if let error = error {
-                // ...
+            if error != nil {
+                print("this is messedup")
                 return
             }
             print("well you are in")
@@ -54,10 +54,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
-        
+        Database.database().isPersistenceEnabled = true
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
-        //FIRApp.configure() // Added by Tyler
+
         return true
     }
 

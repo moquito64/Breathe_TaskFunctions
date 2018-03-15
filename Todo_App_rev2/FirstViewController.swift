@@ -9,47 +9,61 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
-
+import GoogleSignIn
 
 class FirstViewController: UITableViewController {
     
-    var todoItems = [ToDoItem]()
+    var todoItems: [TaskItem] = []
+    var currentUsers: [String] = []
+    var listUser: [String] = []
     var curCount = 0.0
-    let ref = Database.database().reference()
+    let user = Auth.auth().currentUser
+    let ref = Database.database().reference(withPath: "BreatheDatabase")
+    let usersRef = Database.database().reference(withPath: "online")
+    
     
     
     
     
     @IBOutlet weak var myTableView: UITableView!
    
-    //private var todoItems = ToDoItem.getMockData()
+    
     
    
     
     public override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
     {
-        if editingStyle == UITableViewCellEditingStyle.delete
-        {
-            todoItems.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .top)
-           
-            
-            
+        if editingStyle == .delete {
+            let taskItem = todoItems[indexPath.row]
+            taskItem.ref?.removeValue()
         }
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        if indexPath.row < todoItems.count
-        {
-            let item = todoItems[indexPath.row]
-            item.done = !item.done
-            
-            tableView.reloadRows(at: [indexPath], with: .automatic)
+        // 1
+        guard let cell = tableView.cellForRow(at: indexPath) else { return }
+        // 2
+        let taskItem = todoItems[indexPath.row]
+        // 3
+        let toggledCompletion = !taskItem.completed
+        // 4
+        toggleCellCheckbox(cell, isCompleted: toggledCompletion)
+        // 5
+        taskItem.ref?.updateChildValues([
+            "completed": toggledCompletion
+            ])
+    }
+    func toggleCellCheckbox(_ cell: UITableViewCell, isCompleted: Bool) {
+        if !isCompleted {
+            cell.accessoryType = .none
+            cell.textLabel?.textColor = UIColor.black
+            cell.detailTextLabel?.textColor = UIColor.black
+        } else {
+            cell.accessoryType = .checkmark
+            cell.textLabel?.textColor = UIColor.gray
+            cell.detailTextLabel?.textColor = UIColor.gray
         }
     }
-    
     override func numberOfSections(in tableView: UITableView) -> Int
     {
         return 1
@@ -68,9 +82,9 @@ class FirstViewController: UITableViewController {
         if indexPath.row < todoItems.count
         {
             let item = todoItems[indexPath.row]
-            cell.textLabel?.text = item.title
+            cell.textLabel?.text = item.name
             
-            let accessory: UITableViewCellAccessoryType = item.done ? .checkmark : .none
+            let accessory: UITableViewCellAccessoryType = item.completed ? .checkmark : .none
             cell.accessoryType = accessory
         }
         
@@ -82,92 +96,95 @@ class FirstViewController: UITableViewController {
     @objc func didTapAddItemButton(_ sender: UIBarButtonItem)
     {
         // Create an alert
-        let alert = UIAlertController(
-            title: "New Task",
-            message: "Insert the title of the Task:",
-            preferredStyle: .alert)
+        let alert = UIAlertController(title: "New Task Item",
+                                      message: "Add a Task",
+                                      preferredStyle: .alert)
         
-        // Add a text field to the alert for the new item's title
-        alert.addTextField(configurationHandler: nil)
         
         // Add a "cancel" button to the alert. This one doesn't need a handler
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        let cancelAction = UIAlertAction(title: "Cancel",
+                                         style: .default)
         
         // Add a "OK" button to the alert. The handler calls addNewToDoItem()
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
-            if let title = alert.textFields?[0].text
-            {
-                self.addNewToDoItem(title: title)
-            }
-        }))
+        let saveAction = UIAlertAction(title: "Save",
+                                       style: .default) { _ in
+                                        // 1
+                                        guard let textField = alert.textFields?.first,
+                                            let text = textField.text else { return }
+                                        
+                                        // 2
+                                        let taskItem = TaskItem(name: text,
+                                                                addedByUser: (self.user?.email)!,
+                                                                      completed: false)
+                                        // 3
+                                        let taskItemRef = self.ref.child(text.lowercased())
+                                        
+                                        // 4
+                                        taskItemRef.setValue(taskItem.toAnyObject())
+        }
         
         // Present the alert to the user
-        self.present(alert, animated: true, completion: nil)
+        alert.addTextField()
+        
+        alert.addAction(saveAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
     }
-    private func addNewToDoItem(title: String)
-    {
-        // The index of the new item will be the current item count
-        let newIndex = todoItems.count
-        
-        // Create new item and add it to the todo items list
-        todoItems.append(ToDoItem(title: title))
-        
-        
-        // Tell the table view a new row has been created
-        tableView.insertRows(at: [IndexPath(row: newIndex, section: 0)], with: .top)
-    }
+   
     
-    @objc
-    public func applicationDidEnterBackground(_ notification: NSNotification)
-    {
-        do
-        {
-            try todoItems.writeToPersistence()
-        }
-        catch let error
-        {
-            NSLog("Error writing to persistence: \(error)")
-        }
-    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "To-Do"
+        self.title = "Task List"
+        let currentUserRef = self.usersRef.child((self.user?.uid)!)
+        // 2
+        currentUserRef.setValue(self.user?.email)
+        // 3
+        currentUserRef.onDisconnectRemoveValue()
+        
+      
+        ref.queryOrdered(byChild: "completed").observe(.value, with: { snapshot in
+            var newItems: [TaskItem] = []
+            
+            for item in snapshot.children {
+                let taskItem = TaskItem(snapshot: item as! DataSnapshot)
+                if(taskItem.addedByUser == self.user?.email){
+                newItems.append(taskItem)
+                }
+                
+            }
+            
+            self.todoItems = newItems
+            self.tableView.reloadData()
+        })
+       
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(FirstViewController.didTapAddItemButton(_:)))
         
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(UIApplicationDelegate.applicationDidEnterBackground(_:)),
-            name: NSNotification.Name.UIApplicationDidEnterBackground,
-            object: nil)
         
-        do
-        {
-            // Try to load from persistence
-            self.todoItems = try [ToDoItem].readFromPersistence()
-        }
-        catch let error as NSError
-        {
-            if error.domain == NSCocoaErrorDomain && error.code == NSFileReadNoSuchFileError
-            {
-                NSLog("No persistence file found, not necesserially an error...")
+       
+        usersRef.observe(.childAdded, with: { snap in
+            // 2
+            guard let email = snap.value as? String else { return }
+            self.currentUsers.append(email)
+            
+    
+        })
+        
+        usersRef.observe(.childRemoved, with: { snap in
+            guard let emailToFind = snap.value as? String else { return }
+            for (index, email) in self.currentUsers.enumerated() {
+                if email == emailToFind {
+                    self.currentUsers.remove(at: index)
+                    
+                }
             }
-            else
-            {
-                let alert = UIAlertController(
-                    title: "Error",
-                    message: "Could not load the to-do items!",
-                    preferredStyle: .alert)
-                
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                
-                self.present(alert, animated: true, completion: nil)
-                
-                NSLog("Error loading from persistence: \(error)")
-            }
-        }
+        })
+    
+            
+    
 
         // Do any additional setup after loading the view, typically from a nib.
         
