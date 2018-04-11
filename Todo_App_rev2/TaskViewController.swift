@@ -11,7 +11,7 @@ import Firebase
 import FirebaseDatabase
 import GoogleSignIn
 
-class FirstViewController: UITableViewController {
+class TaskViewController: UITableViewController {
     
     var todoItems: [TaskItem] = []
     var currentUsers: [String] = []
@@ -125,6 +125,7 @@ class FirstViewController: UITableViewController {
         
         // Present the alert to the user
         alert.addTextField()
+        alert.addTextField()
         
         alert.addAction(saveAction)
         alert.addAction(cancelAction)
@@ -133,6 +134,7 @@ class FirstViewController: UITableViewController {
     }
    
     
+
     
     
     override func viewDidLoad() {
@@ -161,7 +163,8 @@ class FirstViewController: UITableViewController {
             self.tableView.reloadData()
         })
        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(FirstViewController.didTapAddItemButton(_:)))
+       // self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(TaskViewController.didTapAddItemButton(_:)))
+        
         
         
        
