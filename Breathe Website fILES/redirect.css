@@ -1,0 +1,79 @@
+/*Here is the body background*/
+body {
+background: #fff;
+padding: 350px;
+margin-top: 40px;
+text-align: center;
+font-family: sans-serif;
+font-size: 20px;
+background-image: linear-gradient(0deg, rgba(0,0,0,0.8), rgba(0,0,0,0.8)),url(view-slider-slide.jpg);
+background-size: cover;
+}
+
+
+/*This is the font (teal) for the different text fields*/
+ a {
+color: #008080;
+} 
+
+h1 {
+	color: #008080;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+	overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+    background-color: #111;
+}
+/*Makes the button do things */
+input.myButton {
+display: block;
+border: 1px solid #ccc;
+border-radius: 5px;
+background: #fff;
+padding: 15px;
+outline: none;
+width: 100%;
+margin-bottom: 20px;
+transition: 0.3s;
+font-size: 20px;
+}
+
+input.myButton {
+background: #5d8ffc;
+color: #fff;
+border: 1px solid #5d8ffc;
+border-radius: 5px;
+padding: 15px;
+display: block;
+width: 100%;
+transition: 0.3s;
+margin-bottom: 20px;
+}
+
+input.myButton:hover {
+  background: #fff;
+  color: #5d8ffc;
+  border: 1px solid #5d8ffc;
+  cursor: pointer;
+}
+

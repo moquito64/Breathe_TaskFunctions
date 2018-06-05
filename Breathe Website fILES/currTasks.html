@@ -1,0 +1,62 @@
+<html>
+<head>
+<title> Current Tasks </title>
+<link rel="stylesheet" type ="text/css" href="currTasks.css">
+<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+<ul>
+  <li><a href="redirect.html">Home</a></li>
+  <li><a href="currTasks.html">Current Tasks</a></li>
+  <li><a href="currUsers.html">Current Users</a></li>
+  <li><a href="push.html">Push Notification</a></li>
+</ul>
+</head>
+
+<body>
+<h1> List of all the current tasks </h1>
+<table id="displayData">
+	<tr>
+		<td> User </td> 
+		<td> Completed </td> 
+		<td> Due Date </td> 
+		<td> Time </td>
+		<td> Name </td> 
+	</tr> <br>
+</table>
+
+
+
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAtQYsEavwObn-9n_TFCmfpHNT6yBeaCNw",
+    authDomain: "breathe-96720.firebaseapp.com",
+    databaseURL: "https://breathe-96720.firebaseio.com",
+    projectId: "breathe-96720",
+    storageBucket: "breathe-96720.appspot.com",
+    messagingSenderId: "762376597335"
+  };
+  firebase.initializeApp(config);
+</script>
+
+
+<script type ="text/javascript">
+	var table = document.getElementById('displayData');
+dbRefObject = firebase.database().ref().child('BreatheDatabase' );
+dbRefObject.on('value', snap => {
+	data = snap.val();
+	for(var r in data) {
+		var row = table.insertRow(-1);
+		for(var c in data[r]) {
+			cell = row.insertCell(-1);
+			cell.innerHTML = data[r][c];
+		}
+	}
+});
+
+
+</script>
+
+
+</body>
+
+</html>

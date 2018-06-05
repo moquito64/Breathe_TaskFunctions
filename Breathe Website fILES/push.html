@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<link rel="stylesheet" type ="text/css" href="push.css">
+<!-- Proper URL here -->
+
+<ul>
+  <li><a href="redirect.html">Home</a></li>
+  <li><a href="currTasks.html">Current Tasks</a></li>
+  <li><a href="currUsers.html">Current Users</a></li>
+  <li><a href="push.html">Push Notification</a></li>
+</ul>
+
+</head>
+<meta charset="UTF-8">
+<body>
+	<div class="contact-form">
+	<div class="alert">Your message has been sent</div>
+	<form id="contact-form">
+	<h1> Breathe Push Notification </h1>
+	<h4> Username of Recipient</h4>
+	<input name ="User" type="text" class="form-control" id="User" placeholder="Their Username" required><br>
+	<h4> Due Date </h4>
+	<input name = "DueDate" type = "Date" class = "form-control" id="DueDate" placeholder="2000-01-01" required> <br>
+	<h4> Time it is due </h4>
+	<input name = "DueTime" type = "Time" class = "form-control"  id="DueTime" placeholder="11:59" required> <br>
+	<h4> Name of Task </h4>
+	<input name ="Name" type="text" class="form-control"id="Name" placeholder="Name of Task" required><br>
+	
+	
+	<p class="full">
+       <button type="submit">Submit</button>
+    </p>
+<script src = "https://www.gstatic.com/firebasejs/4.13.0/firebase.js" > </script>	
+<script src="push.js"></script>
+</body>
+</html>

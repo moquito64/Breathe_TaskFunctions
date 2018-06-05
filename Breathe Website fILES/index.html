@@ -1,0 +1,47 @@
+<html>
+<head>
+	<title> Breathe Login Page </title>
+	<link rel = "stylesheet" href ="style.css" />
+</head>
+<body>
+<!-- This creates the login box -->
+
+  <div class = "loginbox">
+  <div id="login_div" class="main-div">
+    <h3>Breathe Login Page</h3>
+    <input type="email" placeholder="Email..." id="email_field" />
+    <input type="password" placeholder="Password..." id="password_field" />
+<!-- Calls function in index.js -->
+    <button onclick="login()">Login to Account</button>
+  </div>
+	<!-- Nice looking UI -->
+  <div id="user_div" class="loggedin-div">
+    <h3>Welcome User</h3>
+    <p id="user_para">Welcome to Firebase web login Example. You're currently logged in.</p>
+	<!-- Redirects to "Home" screen -->
+	<input class="myButton" type="button" value="View All Categories" onclick="window.location.href='redirect.html'" />
+	<!-- Log out button -->
+    <button onclick="logout()">Logout</button>
+  </div>
+  <!-- Regular script to use the Firebase web kit -->
+<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAtQYsEavwObn-9n_TFCmfpHNT6yBeaCNw",
+    authDomain: "breathe-96720.firebaseapp.com",
+    databaseURL: "https://breathe-96720.firebaseio.com",
+    projectId: "breathe-96720",
+    storageBucket: "breathe-96720.appspot.com",
+    messagingSenderId: "762376597335"
+  };
+  firebase.initializeApp(config);
+</script>
+
+<script src = "index.js"></script>
+
+
+
+</body>
+	
+</html>

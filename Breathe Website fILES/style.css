@@ -1,0 +1,68 @@
+body {
+background: #fff;
+padding: 0px;
+margin: 0px;
+font-family: sans-serif;
+font-size: 16px;
+background-image: linear-gradient(0deg, rgba(0,0,0,0.8), rgba(0,0,0,0.8)),url(view-slider-slide.jpg);
+background-size: cover;
+}
+
+input, button {
+font-family: sans-serif;
+font-weight: 700;
+}
+
+.loginbox {
+width: 400px;
+height: 400px;
+background: #000;
+color: #7fffd4;
+top: 50%;
+left: 50%;
+position: absolute;
+transform: translate(-50%, -50%);
+box-sizing: border-box;
+padding: 40px 30px;
+}
+
+
+.main-div, .loggedin-div{
+width: 80%;
+margin: 0px auto;
+margin-top: 0px;
+padding: 20px;
+display: none;
+}
+
+.main-div input, input.myButton {
+display: block;
+border: 1px solid #ccc;
+border-radius: 5px;
+background: #fff;
+padding: 15px;
+outline: none;
+width: 100%;
+margin-bottom: 20px;
+transition: 0.3s;
+}
+
+.main-div button, .loggedin-div button, input.myButton {
+background: #5d8ffc;
+color: #fff;
+border: 1px solid #5d8ffc;
+border-radius: 5px;
+padding: 15px;
+display: block;
+width: 100%;
+transition: 0.3s;
+margin-bottom: 20px;
+}
+
+.main-div button:hover, .loggedin-div button:hover, input.myButton:hover {
+  background: #fff;
+  color: #5d8ffc;
+  border: 1px solid #5d8ffc;
+  cursor: pointer;
+}
+
