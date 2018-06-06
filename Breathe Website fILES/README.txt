@@ -4,8 +4,8 @@ This is Two Muskateers Breathe web application.
 
 Right now there is only one admin account:
 
-tylerpamaral@gmail.com
-Breathe2017
+t************@gmail.com
+************
 
 To log on, start the index.html file and log in to there.
 
