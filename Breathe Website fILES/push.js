@@ -1,12 +1,5 @@
   // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyAtQYsEavwObn-9n_TFCmfpHNT6yBeaCNw",
-    authDomain: "breathe-96720.firebaseapp.com",
-    databaseURL: "https://breathe-96720.firebaseio.com",
-    projectId: "breathe-96720",
-    storageBucket: "breathe-96720.appspot.com",
-    messagingSenderId: "762376597335"
-  };
+  //add api stuff
   firebase.initializeApp(config);
 
 
